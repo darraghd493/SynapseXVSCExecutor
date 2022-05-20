@@ -1,0 +1,40 @@
+{
+	"name": "synapse-x-vsc-executor",
+	"description": "A Synapse X execution function for Visual Studio Code using websockets.",
+	"version": "0.0.1",
+	"publisher": "doge2018",
+	"repository": "https://github.com/dogesupremacy/synapseXVSCExecutor/",
+	"engines": {
+		"vscode": "^1.65.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./src/main/index.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "synapse-x-vsc-executor.execute",
+				"title": "Execute Script"
+			}
+		]
+	},
+	"scripts": {
+	},
+	"devDependencies": {
+		"@types/node": "^12.12.0",
+		"@types/vscode": "^1.65.0",
+		"@typescript-eslint/eslint-plugin": "^5.19.0",
+		"@typescript-eslint/parser": "^5.19.0",
+		"eslint": "^8.13.0",
+		"typescript": "^4.6.3"
+	},
+	"dependencies": {
+		"axios": "^0.27.2",
+		"ws": "^8.6.0"
+	},
+	"license": "GPL-3.0-or-later"
+}
