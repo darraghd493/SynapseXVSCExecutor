@@ -1,5 +1,5 @@
 # Synapse X VSC Executor
-By doge2018. For a friend.
+For a friend.
 
 ## Features
 This extension automatically executes your scripts from Visual Studio Code to Synapse X with support for messages.
