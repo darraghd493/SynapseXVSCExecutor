@@ -1,7 +1,7 @@
 {
 	"name": "synapse-x-vsc-executor",
 	"description": "A Synapse X execution function for Visual Studio Code using websockets.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "doge2018",
 	"repository": "https://github.com/dogesupremacy/SynapseXVSCExecutor/",
 	"engines": {
@@ -19,6 +19,10 @@
 			{
 				"command": "synapse-x-vsc-executor.execute",
 				"title": "Execute Script"
+			},
+			{
+				"command": "synapse-x-vsc-executor.test",
+				"title": "Execute A Test Script"
 			}
 		]
 	},
