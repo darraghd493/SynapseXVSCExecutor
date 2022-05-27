@@ -24,7 +24,15 @@ function execute(client) {
     if (!authenticated)
         return vscode.window.showInformationMessage("Not authenticated with a client.");
     
-    client.send(activeEditor.document.getText());
+    executeScript(client, activeEditor.document.getText());
+}
+
+function executeScript(client, script) {
+    client.send(script);
+}
+
+function executeTest(client) {
+    executeScript(client, 'print("Test print")\nwarn("Test warn")\nerror("Test error")')
 }
 
 function activate(context) {
@@ -121,7 +129,7 @@ function activate(context) {
     context.subscriptions.push(executeDisposable);
     
     let executeTestDisposable = vscode.commands.registerCommand('synapse-x-vsc-executor.test', () => {
-        execute('print("Test print")\nwarn("Test warn")\nerror("Test error")');
+        executeTest(scriptClient);
     });
     context.subscriptions.push(executeTestDisposable);
     
