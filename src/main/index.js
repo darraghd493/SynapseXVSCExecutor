@@ -120,7 +120,7 @@ function activate(context) {
     });
     context.subscriptions.push(executeDisposable);
     
-    let executeTestDisposable = vscode.commands.registerCommand('synapse-x-vsc-executor.execute', () => {
+    let executeTestDisposable = vscode.commands.registerCommand('synapse-x-vsc-executor.test', () => {
         execute('print("Test print")\nwarn("Test warn")\nerror("Test error")');
     });
     context.subscriptions.push(executeTestDisposable);
