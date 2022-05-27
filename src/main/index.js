@@ -31,6 +31,7 @@ function activate(context) {
     let scriptClient;
     let messageClient;
 
+    // Setup the script server
     scriptServer = new WebSocketServer({
         port: settings.scriptServer.port
     });
@@ -54,8 +55,19 @@ function activate(context) {
                     vscode.window.showErrorMessage("Failed to authenticate.")
             });
         });
+        
+        ws.on("close", (message) => {
+            try {
+                authenticated = false;
+                messageClient.close();
+                vscode.window.showInformationMessage("Closed connection with client.");
+            } catch (e) {
+                vscode.window.showErrorMessage("Failed to terminate message websocket connection on script websocket close.");
+            }
+        });
     });
 
+    // Setup the message server
     messageServer = new WebSocketServer({
         port: settings.messageServer.port
     });
@@ -90,19 +102,28 @@ function activate(context) {
                     break;
             }
         });
+        
+        ws.on("close", (message) => {
+            try {
+                authenticated = false;
+                scriptClient.close();
+                vscode.window.showInformationMessage("Closed connection with client.");
+            } catch (e) {
+                vscode.window.showErrorMessage("Failed to terminate script websocket connection on script websocket close.");
+            }
+        });
     });
 
-    
-    let disposable = vscode.commands.registerCommand('synapse-x-vsc-executor.execute', () => {
+    // Register the commands
+    let executeDisposable = vscode.commands.registerCommand('synapse-x-vsc-executor.execute', () => {
         execute(scriptClient);
     });
-    context.subscriptions.push(disposable);
-
+    context.subscriptions.push(executeDisposable);
     
-    let statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-    statusBar.text = "Execute Script";
-    statusBar.command = 'synapse-x-vsc-executor.execute';
-    statusBar.show();
+    let executeStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+    executeStatusBar.text = "Execute Script";
+    executeStatusBar.command = 'synapse-x-vsc-executor.execute';
+    executeStatusBar.show();
 }
 
 function deactivate() {
