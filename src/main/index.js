@@ -120,6 +120,11 @@ function activate(context) {
     });
     context.subscriptions.push(executeDisposable);
     
+    let executeTestDisposable = vscode.commands.registerCommand('synapse-x-vsc-executor.execute', () => {
+        execute('print("Test print")\nwarn("Test warn")\nerror("Test error")');
+    });
+    context.subscriptions.push(executeTestDisposable);
+    
     let executeStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
     executeStatusBar.text = "Execute Script";
     executeStatusBar.command = 'synapse-x-vsc-executor.execute';
