@@ -20,14 +20,14 @@ function execute(client) {
 
     if (activeEditor === undefined)
         return vscode.window.showInformationMessage("No active editor.");
-
-    if (!authenticated)
-        return vscode.window.showInformationMessage("Not authenticated with a client.");
     
     executeScript(client, activeEditor.document.getText());
 }
 
 function executeScript(client, script) {
+    if (!authenticated)
+        return vscode.window.showInformationMessage("Not authenticated with a client.");
+
     client.send(script);
 }
 
